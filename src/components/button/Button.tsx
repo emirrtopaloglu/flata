@@ -1,14 +1,24 @@
+import ButtonProps from "./Button.types";
 import styled from "styled-components";
 
-export const Button = styled.button`
-    background-color: #000;
-    color: #fff;
-    padding: 10px 20px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 16px;
-    font-weight: 600;
-    transition: all 0.2s ease-in-out;
+export const Button = styled.button<ButtonProps>`
+  background-color: ${(props) => props.theme.colors.primary[500]};
+  color: ${(props) => props.theme.colors.white};
+  padding: ${(props) => props.theme.space[4] + " " + props.theme.space[8]};
+  border-radius: ${(props) => props.theme.radius.default};
+  font-size: ${(props) => props.theme.fontSizes.md};
+  line-height: ${(props) => props.theme.lineHeights.md};
+  border: 1px solid ${(props) => props.theme.colors.primary[500]};
+  cursor: pointer;
+  transition: ${(props) => props.theme.transition.default};
 
+  &:hover {
+    background-color: ${(props) => props.theme.colors.primary[600]};
+    border-color: ${(props) => props.theme.colors.primary[600]};
+  }
+
+  &:focus {
+    outline: none;
+    box-shadow: 0 0 0 4px ${(props) => props.theme.colors.primary[200]};
+  }
 `;

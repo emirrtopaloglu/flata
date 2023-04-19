@@ -1,23 +1,42 @@
-import React from "react";
-import { ComponentStory, ComponentMeta } from "@storybook/react";
-import { Button } from "./Button";
+import type { Meta, StoryObj, Decorator, Parameters } from "@storybook/react";
 
-export default {
+import { Button } from "./Button";
+import { FlataProvider, flataTheme } from "../../theme";
+
+const meta: Meta<typeof Button> = {
   title: "Flata/Button",
   component: Button,
-} as ComponentMeta<typeof Button>;
-
-const Template: ComponentStory<typeof Button> = (args: any) => (
-  <Button {...args} />
-);
-
-export const HelloWorld = Template.bind({});
-// More on args: https://storybook.js.org/docs/react/writing-stories/args
-HelloWorld.args = {
-  label: "Hello world!",
+  argTypes: {
+    variant: {
+      options: ["primary", "secondary"],
+      control: { type: "select" },
+    },
+  },
 };
 
-export const ClickMe = Template.bind({});
-ClickMe.args = {
-  label: "Click me!",
+export default meta;
+type Story = StoryObj<typeof Button>;
+
+export const PrimaryButton: Story = {
+  args: {
+    children: "Primary Button",
+    onClick: () => console.log("Primary Button Clicked"),
+    variant: "primary",
+  },
+  decorators: [
+    (Story) => (
+      <FlataProvider theme={flataTheme}>
+        <Story />
+      </FlataProvider>
+    ),
+  ],
+  parameters: {
+    controls: {
+      controls: {
+        hideNoControlsWarning: true,
+        expanded: true,
+        hide: ["ref", "render", "theme"],
+      },
+    },
+  },
 };
