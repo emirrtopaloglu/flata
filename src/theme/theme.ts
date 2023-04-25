@@ -62,9 +62,7 @@ const theme = {
     13: "3.5rem",
     14: "4rem",
   },
-  transition: {
-    default: "all 0.3s ease-in-out",
-  },
+  transition: "all 0.2s ease-in-out",
 };
 
 export { theme };

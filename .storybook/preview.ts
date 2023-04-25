@@ -1,4 +1,12 @@
 import type { Preview } from "@storybook/react";
+import { createGlobalStyle } from "styled-components";
+import { withThemeFromJSXProvider } from "@storybook/addon-styling";
+
+const GlobalStyles = createGlobalStyle`
+  * {
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  }
+`;
 
 const preview: Preview = {
   parameters: {
@@ -11,5 +19,11 @@ const preview: Preview = {
     },
   },
 };
+
+export const decorators = [
+  withThemeFromJSXProvider({
+    GlobalStyles,
+  }),
+];
 
 export default preview;
