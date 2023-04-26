@@ -3,7 +3,15 @@ import styled from "styled-components";
 interface ButtonComponentProps {
   children?: React.ReactNode;
   onClick?: () => void;
-  variant?: "primary" | "secondary";
+  variant?:
+    | "primary"
+    | "danger"
+    | "success"
+    | "warning"
+    | "info"
+    | "secondary"
+    | "light"
+    | "dark";
   size?: "small" | "medium" | "large";
   block?: boolean;
   outline?: boolean;
@@ -32,10 +40,19 @@ const StyledButton = styled.button<ButtonProps>`
     props.outline
       ? "transparent"
       : props.theme.colors[props.variant || DEFAULT_PROPS.variant]["500"]};
-  color: ${(props) =>
-    props.outline
-      ? props.theme.colors[props.variant || DEFAULT_PROPS.variant]["500"]
-      : props.theme.colors.white};
+  color: ${(props) => {
+    if (props.variant == "light") {
+      return props.theme.colors.secondary["900"];
+    } else {
+      if (props.outline) {
+        return props.theme.colors[props.variant || DEFAULT_PROPS.variant][
+          "500"
+        ];
+      } else {
+        return props.theme.colors.white;
+      }
+    }
+  }};
   border: 1px solid;
   border-color: ${(props) =>
     props.theme.colors[props.variant || DEFAULT_PROPS.variant]["500"]};
